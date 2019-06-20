@@ -8,18 +8,18 @@
 
 std::vector<City> greedy(const std::vector<City> &citys) {
     std::vector<City> visited;
-    std::vector<City> unvisted = citys;
+    std::vector<City> unvisited = citys;
 
-    City locate = unvisted.at(0);
+    City locate = unvisited.at(0);
     visited.push_back(locate);
-    unvisted.erase(unvisted.begin());
+    unvisited.erase(unvisited.begin());
 
-    while (unvisted.size() != 0) {
+    while (unvisited.size() != 0) {
         // 求最短距离
-        std::vector<City>::iterator min_distance_iter = unvisted.begin();
+        std::vector<City>::iterator min_distance_iter = unvisited.begin();
         double min_distance = locate.distance(*min_distance_iter);
 //        std::cout << "\n dis first: "  << min_distance <<"\t";
-        for (std::vector<City>::iterator i = unvisted.begin(); i != unvisted.end() ; ++i) {
+        for (std::vector<City>::iterator i = unvisited.begin(); i != unvisited.end() ; ++i) {
             // 遍历当前城市与剩余城市的距离选择最短的
             double distance = locate.distance(*i);
 //            std::cout << "dis: " << distance <<"\t";
@@ -31,7 +31,7 @@ std::vector<City> greedy(const std::vector<City> &citys) {
 //        std::cout <<"min dis: " << locate.distance(*min_distance_iter) << " lo: " << *min_distance_iter << "\n";
         locate = *min_distance_iter;
         visited.push_back(*min_distance_iter);
-        unvisted.erase(min_distance_iter);
+        unvisited.erase(min_distance_iter);
     }
     return visited;
 }
